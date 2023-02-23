@@ -1,25 +1,9 @@
-const NavEL = (options) => {
-    const el=document.createElement(options.element)
-
-    for (const key in options) {
- if(key!=="element"&&key!=="children")
- {
-    el[key]=options[key];
- }
-if(options.children)
-{
-    if(Array.isArray(options.children))
-    {
-    options.children.forEach(element => {
-        el.append(element)
-    });
-    }
-    else{
-        el.append(options.children);
-    }
-}
-
-    }
+const NavEL = ({element,children,...others}) => {
+    const el=document.createElement(element||"div")
+    for (const key in others) 
+    el[key]=others[key];
+if(children)
+(Array.isArray(children))?el.append(...children):el.append(children);  
     return el;
 }
 export default NavEL;
